@@ -1,3 +1,5 @@
+import java.util.List;
+
 public class ListaDobleEnlace {
     public Nodo cabeza;
     public int largo;
@@ -55,5 +57,9 @@ public class ListaDobleEnlace {
         }
         
         //1 -> 2 -> 3 -> 4 (pos 2)
+    }
+
+    public void listaAlRevez(List<Integer> lista){
+
     }
 }
