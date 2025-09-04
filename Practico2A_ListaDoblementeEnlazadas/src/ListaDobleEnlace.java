@@ -1,10 +1,22 @@
 import java.util.List;
 
 public class ListaDobleEnlace {
-    public Nodo cabeza;
-    public int largo;
+    private Nodo cabeza;
+    private int largo;
 
+    public Nodo getCabeza() {
+        return cabeza;
+    }
 
+    public void imprimirLista(){
+        if (largo == 0 || cabeza == null) return;
+        Nodo aux = cabeza;
+        while (aux != null){
+            System.out.print(aux.getValor()+" -> ");
+            aux = aux.getSiguiente();
+        }
+        System.out.print("NULL");
+    }
 
     public ListaDobleEnlace(){
         largo = 0;
@@ -21,14 +33,14 @@ public class ListaDobleEnlace {
             largo++;
             return;
         }
-        nuevo.siguiente = this.cabeza;
-        this.cabeza.anterior = nuevo;
+        nuevo.setSiguiente(this.cabeza);
+        this.cabeza.setAnterior(nuevo);
         this.cabeza = nuevo;
         largo++;
     }
 
     public int valorCabeza(){
-        return cabeza.valor;
+        return cabeza.getValor();
     }
 
     public void insertarNodoAlFinal(int valor){
@@ -39,11 +51,11 @@ public class ListaDobleEnlace {
             return;
         }
         Nodo aux = cabeza;
-        while(aux.siguiente != null){
-            aux = aux.siguiente;
+        while(aux.getSiguiente() != null){
+            aux = aux.getSiguiente();
         }
-        nuevo.anterior = aux;
-        aux.siguiente = nuevo;
+        nuevo.setAnterior(aux);
+        aux.setSiguiente(nuevo);
     }
 
     public void insertarValorEnPosicion(int pos, int valor){
@@ -52,14 +64,54 @@ public class ListaDobleEnlace {
         Nodo aux = cabeza;
         int indice = 1;
         while(indice != pos){
-            aux = aux.siguiente;
+            aux = aux.getSiguiente();
             indice++;
         }
         
         //1 -> 2 -> 3 -> 4 (pos 2)
     }
 
-    public void listaAlRevez(List<Integer> lista){
+    public void imprimirListaAlRevez(){
+        if (cabeza == null || largo == 0) return;
+        Nodo aux = cabeza;
+        while (aux.getSiguiente() != null){
+            aux = aux.getSiguiente();
+        }
+        System.out.print("NULL");
+        while (aux != null){
+            System.out.print(" -> "+aux.getValor());
+            aux = aux.getAnterior();
+        }
+    }
 
+    public void insercionEnOrden(int valor){
+        Nodo nuevo = new Nodo(valor);
+        if (cabeza == null) {
+            cabeza = nuevo;
+            return;
+        };
+        Nodo aux = cabeza;
+        // 1 -> 1 -> 2 -> 2 -> 3 -> 4 -> 4
+        while(aux.getSiguiente() != null){
+            if (aux.getSiguiente().getValor() > valor){
+                nuevo.setSiguiente(aux.getSiguiente());
+                aux.setSiguiente(nuevo);
+                return;
+            }
+            aux = aux.getSiguiente();
+        }
+    }
+    
+    public void unirDosListas(ListaDobleEnlace lista){
+        if (lista == null) return;
+        if (cabeza == null) {
+            cabeza = lista.getCabeza();
+            return;
+        };
+        Nodo aux = cabeza;
+        while (aux.getSiguiente() != null){
+            aux = aux.getSiguiente();
+        }
+        aux.setSiguiente(lista.getCabeza());
     }
 }

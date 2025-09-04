@@ -1,27 +1,17 @@
 public class Nodo {
-    private int valor;
+    private char valor;
     private Nodo siguiente;
-    private Nodo anterior;
 
-    public Nodo(int valor){
+    public Nodo(char valor){
         this.valor = valor;
     }
-
-    public int getValor(){
+    public char getValor(){
         return valor;
     }
     public Nodo getSiguiente(){
         return siguiente;
     }
-
     public void setSiguiente(Nodo valor){
         siguiente = valor;
-    }
-
-    public void setAnterior(Nodo valor){
-        anterior = valor;
-    }
-    public Nodo getAnterior(){
-        return anterior;
     }
 }
